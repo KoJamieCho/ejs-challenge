@@ -48,13 +48,16 @@ app.post("/compose", function(req,res) {
 
 app.get("/posts/:postName", function(req,res) {
   var requestdTitle = _.lowerCase(req.params.postName);
+
   posts.forEach(function(post) {
     var storedTitle = _.lowerCase(post.title);
-    if(requestdTitle === storedTitle) {
-      console.log("Match Found!");
-    } else {
-      console.log("Not Match Found!");
-    }
+    if(storedTitle === requestdTitle) {
+
+      res.render("post", {
+        title:post.title,
+        content:post.content
+      });
+    } 
   });
 });
 
